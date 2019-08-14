@@ -1,21 +1,34 @@
-package com.pvmeira.TodoBackend.dto;
+package com.pvmeira.TodoBackend.model;
 
+import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
-public class TodoDTO {
+@Entity(name = "TODO")
+public class Todo {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     private Long id;
+    @Column(  name = "USERNAME"
+            , length = 120
+            , nullable = false)
     private String username;
+    @Column(  name = "DESCRIPTION"
+            , length = 220
+            , nullable = false)
     private String description;
+    @Column(name = "IS_DONE")
     private Boolean isDone;
+    @Column(name = "TARGET_DATA")
     private LocalDate targetData;
-    
-    public static synchronized TodoDTO create() {
-        return new TodoDTO();
+
+
+    public static synchronized Todo create() {
+        return new Todo();
     }
 
-    public TodoDTO() {
+    public Todo() {
     }
 
     public Long getId() {
@@ -58,27 +71,27 @@ public class TodoDTO {
         this.targetData = targetData;
     }
 
-    public TodoDTO withId(Long id) {
+    public Todo withId(Long id) {
         this.id = id;
         return this;
     }
 
-    public TodoDTO withUsername(String username) {
+    public Todo withUsername(String username) {
         this.username = username;
         return this;
     }
 
-    public TodoDTO withDescription(String description) {
+    public Todo withDescription(String description) {
         this.description = description;
         return this;
     }
 
-    public TodoDTO withDone(Boolean done) {
+    public Todo withDone(Boolean done) {
         isDone = done;
         return this;
     }
 
-    public TodoDTO withTargetData(LocalDate targetData) {
+    public Todo withTargetData(LocalDate targetData) {
         this.targetData = targetData;
         return this;
     }
